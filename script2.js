@@ -22,10 +22,14 @@ const light1 = new THREE.DirectionalLight(0xffffff, 1.0);
 light1.position.set (2,2,2); 
 scene.add(light1);
 
-const geometry = new THREE.ConeGeometry();
-const material1 = new THREE.MeshPhongMaterial({color: 0xff0000, shininess : 90.0 });
-const box1 = new THREE.Mesh( geometry, material1 );
-scene.add(box1); 
+const geometry = new THREE.OctahedronGeometry();
+const material1 = new THREE.MeshPhongMaterial({color: 0xffd400, shininess : 90.0 });
+const material2 = new THREE.MeshPhongMaterial({color: 0xff0000, shininess : 90.0 });
+const mesh1 = new THREE.Mesh( geometry, material1 );
+const mesh2 = new THREE.Mesh( geometry, material2 );
+scene.add(mesh1); 
+scene.add(mesh2); 
+mesh2.position.set(-2, 0, -2);
 
 // https://developer.mozilla.org/ko/docs/Web/API/Window/requestAnimationFrame 참고
 var start = null;
@@ -34,6 +38,8 @@ function animate(timestamp) {
 	var progress = timestamp - start;
 
 	renderer.render(scene, camera);
+	mesh1.rotation.y += 0.01;
+	mesh2.rotation.y += 0.01;
 	console.log(camera.position);
 	if (progress < 1000) {
 		animate1();
@@ -43,6 +49,8 @@ function animate(timestamp) {
 		requestAnimationFrame(animate);
 	} else if (progress < 5000) {
 		animate3();
+		if (progress > 4500)
+			animate3_1();
 		requestAnimationFrame(animate);
 	} else if (progress < 7000) {
 		animate4();
@@ -79,6 +87,9 @@ const animate3 = function() {
 	camera.position.z = camera.position.z + 0.02 <= 3.5 ? camera.position.z + 0.02 : 3.5;
 	camera.lookAt(0, 0, 0);
 }
+const animate3_1 = function() {
+	mesh2.position.x += 0.1;
+}
 
 // 넥스트 레벨
 const animate4 = function() {
@@ -113,3 +124,4 @@ const animate7 = function(timestamp) {
 	camera.position.z -= Math.random() / 20;
 	camera.lookAt(0,0,0);
 }
+

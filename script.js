@@ -34,27 +34,27 @@ function animate(timestamp) {
 	var progress = timestamp - start;
 
 	renderer.render(scene, camera);
+	console.log(camera.position);
 	if (progress < 1000) {
 		animate1();
 		requestAnimationFrame(animate);
-		console.log(camera.position.z);
-	} else if (progress < 2000) {
+	} else if (progress < 3000) {
 		animate2();
 		requestAnimationFrame(animate);
-	} else if (progress < 3000) {
+	} else if (progress < 5000) {
 		animate3();
 		requestAnimationFrame(animate);
-	} else if (progress < 4000) {
+	} else if (progress < 7000) {
 		animate4();
 		requestAnimationFrame(animate);
-	} else if (progress < 5000) {
+	} else if (progress < 9000) {
 		animate5();
 		requestAnimationFrame(animate);
-	} else if (progress < 6000) {
+	} else if (progress < 11000) {
 		animate6();
 		requestAnimationFrame(animate);
-	} else if (progress < 7000) {
-		animate7();
+	} else if (progress < 13000) {
+		animate7(timestamp);
 		requestAnimationFrame(animate);
 	}
 };
@@ -67,31 +67,31 @@ const animate1 = function() {
 
 // 넥스트 레벨
 const animate2 = function() {
-	camera.position.x = 1.0;
-	camera.position.y = 2.0;
+	camera.position.x = camera.position.x + 0.1 <= 1.0 ? camera.position.x + 0.1 : 1.0;
+	camera.position.y = camera.position.y + 0.2 <= 2.0 ? camera.position.y + 0.2 : 2.0;
 	camera.lookAt(0, 0, 0);
 }
 
 // 저 너머의 문을 열어
 const animate3 = function() {
-	camera.position.x = 0;
-	camera.position.y = 0.2;
-	camera.position.z = 3.5;
+	camera.position.x = camera.position.x - 0.01 >= 0.1 ? camera.position.x - 0.01 : 0.1;
+	camera.position.y = camera.position.y - 0.01 >= 1.1 ? camera.position.y - 0.01 : 1.1;
+	camera.position.z = camera.position.z + 0.02 <= 3.5 ? camera.position.z + 0.02 : 3.5;
 	camera.lookAt(0, 0, 0);
 }
 
 // 넥스트 레벨
 const animate4 = function() {
-	camera.position.x = 0.5;
-	camera.position.y = 2.0;
+	camera.position.x = camera.position.x + 0.1 <= 0.5 ? camera.position.x + 0.1 : 0.5;
+	camera.position.y = camera.position.y + 0.2 <= 2.0 ? camera.position.y + 0.2 : 2.0;
 	camera.lookAt(0, 0, 0);
 }
 
 // 널 결국엔 내가 부셔
 const animate5 = function() {
-	camera.position.x = -1;
-	camera.position.y = -0.3;
-	camera.position.z = 4;
+	camera.position.x = camera.position.x - 0.04 >= -1 ? camera.position.x - 0.04 : -1;
+	camera.position.y = camera.position.y - 0.03 >= -0.2 ? camera.position.y - 0.03 : -0.2;
+	camera.position.z = camera.position.z + 0.03 <= 4 ? camera.position.z + 0.03 : 4;
 	camera.lookAt(0, 0, 0);
 }
 
@@ -107,9 +107,9 @@ const animate6 = function() {
 }
 
 // 코스모에 닿을 때까지 넥스트 레벨 제껴라 제껴라 제껴라
-const animate7 = function() {
+const animate7 = function(timestamp) {	
 	camera.position.x = 0;
 	camera.position.y = 0;
-	camera.position.z = 5;
+	camera.position.z -= Math.random() / 20;
 	camera.lookAt(0,0,0);
 }

@@ -2,6 +2,8 @@
 
 22-1컴퓨터그래픽스 기말과제
 
+[index.html 영상](index.mp4)
+
 # PerspectiveCamera를 제대로 활용하여 뮤직비디오 같이 화려한 장면 연출하기
 1. index1.html - rotation을 활용한 팬, 틸트 샷
 2. index2.html - position을 활용한 붐, 아크 샷

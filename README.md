@@ -2,7 +2,7 @@
 
 22-1컴퓨터그래픽스 기말과제
 
-[index.html 영상](index.mp4)
+- [index.html 영상](index.mp4)
 
 # PerspectiveCamera를 제대로 활용하여 뮤직비디오 같이 화려한 장면 연출하기
 1. index1.html - rotation을 활용한 팬, 틸트 샷
@@ -22,7 +22,7 @@
 2. 카메라 전체를 움직이는 방법인 붐, 아크 샷 연출하기
 3. 카메라 렌즈가 움직이는 방법인 줌과 흔히 개인 직캠이라고 부르는 방법인 싱글 샷 연출하기
 
-OctahedronGeometry를 공연을 하는 아이돌로, PerspectiveCamera를 공연을 찍는 카메라로 가정해 표현하였습니다. 이때 기본 스켈레톤 코드로는 이 [깃 허브 코드](https://github.com/learn-cg/three.js/blob/main/05_transform_auto.js)를, 장면의 배경 설정은 이 [깃 허브 코드](https://github.com/learn-cg/three.js/blob/main/15_texture_cube.js)를 참고하였습니다. 그리고 간단히 시간에 따라 다른 애니메이션 클립이 실행되도록 하는 일은 이 [모질라 글](https://developer.mozilla.org/ko/docs/Web/API/Window/requestAnimationFrame)을 참고하였습니다.
+OctahedronGeometry를 공연을 하는 아이돌로, PerspectiveCamera를 공연을 찍는 카메라 또는 아이돌 개인을 찍는 카메라로 가정해 표현하였습니다. 이때 기본 스켈레톤 코드로는 이 [깃 허브 코드](https://github.com/learn-cg/three.js/blob/main/05_transform_auto.js)를, 장면의 배경 설정은 이 [깃 허브 코드](https://github.com/learn-cg/three.js/blob/main/15_texture_cube.js)를 참고하였습니다. 그리고 간단히 시간에 따라 다른 애니메이션 클립이 실행되도록 하는 일은 이 [모질라 글](https://developer.mozilla.org/ko/docs/Web/API/Window/requestAnimationFrame)을 참고하였습니다.
 
 각 주제에서 OctahedronGeometry의 위치와 움직임은 모두 동일하며, PerspectiveCamera의 위치와 움직임만 달리합니다. 이와 같은 각 주제의 세부 개발 과정을 설명하자면 다음과 같습니다.
 
@@ -95,3 +95,6 @@ function animate(timestamp) {
 위와 같이 줌은 PerspectiveCamera의 fov 값을 45에서 15로 축소함으로써 개발할 수 있었습니다. 그리고 싱글 샷(개인 직캠)은 lookAt()과 mesh2.getWorldPosition() 메소드를 이용함으로써 개발할 수 있었습니다. 따라서 참고 영상처럼 멀리서 확대하여 계속 mesh2를 중심으로 촬영하는 장면을 연출할 수 있었습니다.
 
 ## 3) 느낀 점
+개인적으로 컴퓨터그래픽스 강의를 수강하면서 특히 어려웠던 주제가 <View/Projection Transform>이었습니다. 그런데 05월 18일 강의에서 07_a_cam_hierachy 예제로 lookAt() 메소드와 getWorldPosition() 메소드를 활용한 실습을 할 때만은 여기에서 아이돌 직캠을 예제로 들면 더 쉽게 이해할 수 있을 것 같다는 아이디어가 떠올랐습니다.
+
+그래서 이와 관련된 학습 웹 컨텐츠를 제작하기 위해 따로 WebGL 이론을 찾아보다 보니 모델좌표계와 월드좌표계 등의 **개념을 확실히 이해할 수** 있었고, 능동적으로 Three.js 코드를 작성해보면서 흥미도 생기고 **자연스레 코드를 익힐 수** 있었습니다. 따라서 **학습 웹 컨텐츠를 제작해보고 공유하는 일의 중요성과 필요성을 깨닫게** 되어 앞으로도 이런 활동이 더욱 활성화 되었으면 좋겠다는 생각을 가지게 되었습니다.

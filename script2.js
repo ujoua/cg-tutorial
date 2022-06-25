@@ -1,6 +1,6 @@
 // 05_transform_auto 참고
-const h_scr = window.innerWidth;
-const v_scr = window.innerHeight; 
+const h_scr = document.getElementById("HelloCanvas").width;
+const v_scr = document.getElementById("HelloCanvas").height;
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, h_scr/v_scr, 0.1, 1000);
 camera.position.z = 5;
@@ -35,7 +35,7 @@ mesh2.position.set(-2, 0, -2);
 var start = null;
 function animate(timestamp) {
 	if (!start) start = timestamp;
-	var progress = timestamp - start;
+	var progress = (timestamp - start) % 20000;
 
 	renderer.render(scene, camera);
 	mesh1.rotation.y += 0.01;
@@ -63,6 +63,15 @@ function animate(timestamp) {
 		requestAnimationFrame(animate);
 	} else if (progress < 13000) {
 		animate7(timestamp);
+		requestAnimationFrame(animate);
+	} else {
+		if (progress > 15000) {
+			mesh1.position.set(0, 0, 0);
+			mesh2.position.set(-2, 0, -2);
+			camera.position.set(0, 0, 5);
+			camera.lookAt(0,0,0);
+			radians = theta * Math.PI/180;
+		}
 		requestAnimationFrame(animate);
 	}
 };
@@ -109,7 +118,8 @@ const animate5 = function() {
 // 넥스트 레벨
 // https://stackoverflow.com/questions/27095251/how-to-rotate-a-three-perspectivecamera-around-on-object 참고
 var radius = 6; 
-var radians = Math.PI / 180 * 45;
+var theta = 45;
+var radians = theta * Math.PI/180;
 const animate6 = function() {
 	camera.position.x = radius * Math.cos(radians);  
 	camera.position.z = radius * Math.sin(radians);

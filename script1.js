@@ -1,8 +1,9 @@
 // 05_transform_auto 참고
-const h_scr = window.innerWidth;
-const v_scr = window.innerHeight; 
+const h_scr = document.getElementById("HelloCanvas").width;
+const v_scr = document.getElementById("HelloCanvas").height;
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, h_scr/v_scr, 0.1, 1000);
+camera.lookAt(0, 0, 0);
 camera.position.z = 5;
 
 const renderer = new THREE.WebGLRenderer({canvas: HelloCanvas}); 
@@ -35,9 +36,11 @@ mesh2.position.set(-2, 0, -2);
 var start = null;
 function animate(timestamp) {
 	if (!start) start = timestamp;
-	var progress = timestamp - start;
+	var progress = (timestamp - start) % 10000;
 	console.log(progress);
+	
 	renderer.render(scene, camera);
+	
 	if (progress < 1000) { // 틸트
 		camera.rotation.x += 0.01;
 		camera.rotation.y = 0;
@@ -71,6 +74,12 @@ function animate(timestamp) {
 		camera.rotation.x = 0;
 		camera.rotation.y = 0;
 		camera.rotation.z -= 0.01;
+		requestAnimationFrame(animate);
+	} else {
+		if (progress > 8000) {
+			mesh1.position.set(0, 0, 0);
+			mesh2.position.set(-2, 0, -2);
+		}
 		requestAnimationFrame(animate);
 	}
 };
